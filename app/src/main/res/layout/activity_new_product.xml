@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewProductActivity">
+
+
+    <TextView
+        android:id="@+id/name_protein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:paddingTop="@dimen/standard_layout_padding_top"
+        android:text="@string/protein">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_protein_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_protein"
+        android:inputType="numberDecimal"
+        android:paddingEnd="@dimen/standard_layout_padding_end"
+        android:paddingStart="@dimen/standard_layout_padding_start">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/name_fat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_protein"
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:paddingTop="@dimen/standard_layout_padding_top"
+        android:text="@string/fat">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_fat_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_fat"
+        android:layout_below="@id/edit_protein_number"
+        android:inputType="numberDecimal"
+        android:paddingEnd="@dimen/standard_layout_padding_end"
+        android:paddingStart="@dimen/standard_layout_padding_start">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/name_carbohydrates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_fat"
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:paddingTop="@dimen/standard_layout_padding_top"
+        android:text="@string/carbohydrates">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_carbohydrates_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_carbohydrates"
+        android:layout_below="@id/edit_fat_number"
+        android:inputType="numberDecimal"
+        android:paddingEnd="@dimen/standard_layout_padding_end"
+        android:paddingStart="@dimen/standard_layout_padding_start">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/name_calorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_carbohydrates"
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:paddingTop="@dimen/standard_layout_padding_top"
+        android:text="@string/Calorie">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_calorie_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_calorie"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/edit_carbohydrates_number"
+        android:paddingEnd="@dimen/standard_layout_padding_end"
+        android:paddingStart="@dimen/standard_layout_padding_start">
+
+    </EditText>
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_layout_padding"
+        android:layout_toEndOf="@id/edit_carbohydrates_number"
+        android:layout_below="@id/edit_fat_number"
+        android:text="@string/example"
+        >
+
+    </Button>
+
+
+
+</RelativeLayout>

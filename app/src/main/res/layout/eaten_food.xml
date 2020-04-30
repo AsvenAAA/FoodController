@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/food_image"
+            android:padding="@dimen/standard_layout_padding_top"
+            android:src="@mipmap/ic_launcher"
+            android:layout_below="@id/food_name">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_padding_top"
+            android:paddingStart="@dimen/standard_layout_padding_start"
+            android:text="@string/example"
+            android:textSize="@dimen/standard_text_size">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_padding_top"
+            android:paddingEnd="@dimen/large_layout_padding_end"
+            android:layout_alignParentEnd="true"
+            android:text="@string/example"
+            android:textSize="@dimen/standard_text_size">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_padding_top"
+            android:paddingEnd="@dimen/large_layout_padding_end"
+            android:layout_alignParentEnd="true"
+            android:text="@string/example"
+            android:textSize="@dimen/standard_text_size"
+            android:layout_below="@id/protein">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/carbohydrates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_padding_top"
+            android:paddingEnd="@dimen/large_layout_padding_end"
+            android:layout_alignParentEnd="true"
+            android:text="@string/example"
+            android:textSize="@dimen/standard_text_size"
+            android:layout_below="@id/fat">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_layout_padding_top"
+            android:paddingEnd="@dimen/large_layout_padding_end"
+            android:layout_alignParentEnd="true"
+            android:text="@string/example"
+            android:textSize="@dimen/standard_text_size"
+            android:layout_below="@id/carbohydrates">
+
+        </TextView>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
