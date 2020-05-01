@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             adapter = this.adapter
             layoutManager = this.layoutManager
         }
-        
+
 
         val buttonAddProduct: Button = findViewById<Button>(R.id.main_add_button)
         buttonAddProduct.setOnClickListener {
@@ -52,7 +52,5 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_VARIABLE = "com.example.foodcontroller"
     }
-
-
 
 }

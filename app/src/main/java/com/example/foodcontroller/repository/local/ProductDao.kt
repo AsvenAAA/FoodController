@@ -1,11 +1,12 @@
 package com.example.foodcontroller.repository.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface ProductDao {
-    @Query("SELECT * FROM product_table")
-    fun getAllProducts() : List<ProductEntity>
+    @Query("SELECT * FROM product_table ORDER by product_name ASC")
+    fun getAllProducts() : LiveData<List<ProductEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(productEntity: ProductEntity)
@@ -14,9 +15,9 @@ interface ProductDao {
     fun deleteAllProducts()
 
     @Update()
-    fun updateTarget(productEntity: ProductEntity)
+    suspend fun updateTarget(productEntity: ProductEntity)
 
     @Delete()
-    fun deleteTarget(productEntity: ProductEntity)
+    suspend fun deleteTarget(productEntity: ProductEntity)
 
 }
