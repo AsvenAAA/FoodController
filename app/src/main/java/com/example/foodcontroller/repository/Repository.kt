@@ -16,7 +16,7 @@ class Repository(private val productDao: ProductDao) {
         productDao.insert(productEntity)
     }
 
-    suspend fun delete(productEntity: ProductEntity) {
+    suspend fun deleteTarget(productEntity: ProductEntity) {
         productDao.deleteTarget(productEntity)
     }
 

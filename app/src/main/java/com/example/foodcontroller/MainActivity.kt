@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.foodcontroller.repository.local.ProductEntity
 import java.math.BigDecimal
 import java.math.BigInteger
 
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: RecyclerView.Adapter<FoodAdapter.FoodHolder>
-    var myData: Array<String> = arrayOf()
+    //var myData: List<ProductEntity> = arrayOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val buttonAddProduct: Button = findViewById<Button>(R.id.main_add_button)
+        val buttonAddProduct: Button = findViewById<Button>(R.id.fabAddNewProduct)
         buttonAddProduct.setOnClickListener {
             val intentToNewProduct = Intent(this@MainActivity, NewProductActivity::class.java)//.apply {
                 //putExtra("EXTRA_VARIABLE", myData)
@@ -41,8 +42,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun getData(): Array<Array<String>>{
-        return arrayOf(myData)
+    fun getData(): List<ProductEntity>{
+        TODO()
     }
 
     fun addNewProduct(){

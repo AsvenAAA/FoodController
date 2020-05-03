@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- RecyclerView Activity style -->
+    <style name="DefaultRecyclerViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/standard_layout_padding</item>
+        <item name="android:layout_below">@id/greeting</item>
+    </style>
+
 </resources>
