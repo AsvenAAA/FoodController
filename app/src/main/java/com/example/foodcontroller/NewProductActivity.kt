@@ -17,14 +17,13 @@ class NewProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_product)
 
+        val productView = findViewById<TextView>(R.id.edit_product_name)
         val proteinView = findViewById<TextView>(R.id.edit_protein_number)
         val fatView = findViewById<TextView>(R.id.edit_fat_number)
         val carbohydratesView = findViewById<TextView>(R.id.edit_carbohydrates_number)
         val calorieView = findViewById<TextView>(R.id.edit_calorie_number)
 
-        var myData = intent.getStringArrayExtra(EXTRA_VARIABLE)
-
-        val button: Button = findViewById<Button>(R.id.save_button)
+        val button = findViewById<Button>(R.id.save_button)
         button.setOnClickListener{
             val replyIntent = Intent()
             if(TextUtils.isEmpty(proteinView.text) and
@@ -35,12 +34,13 @@ class NewProductActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
 
+                val product = productView.text.toString()
                 val protein = proteinView.text.toString()
                 val fat = fatView.text.toString()
                 val carbohydrates = carbohydratesView.text.toString()
                 val calorie = calorieView.text.toString()
 
-                val dataList = listOf<String>(protein, fat, carbohydrates, calorie)
+                val dataList = arrayOf<String>(product, protein, fat, carbohydrates, calorie)
 
                 replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEWPRODUCTACTIVITY, dataList)
                 setResult(Activity.RESULT_OK, replyIntent)

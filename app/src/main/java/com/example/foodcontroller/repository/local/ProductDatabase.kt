@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Database(entities = arrayOf(ProductEntity::class), version = 1)
 abstract class ProductDatabase : RoomDatabase() {
@@ -17,8 +18,12 @@ abstract class ProductDatabase : RoomDatabase() {
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
             INSTANCE?.let { database ->
-                var productDao = database.getProductDao()
+                scope.launch {
+                    var productDao = database.getProductDao()
 
+                    var testProductEntity = ProductEntity("TestFood", 10f, 9f, 8f, 7f)
+                    productDao.insert(testProductEntity)
+                }
             }
         }
     }

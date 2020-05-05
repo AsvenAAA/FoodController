@@ -2,6 +2,7 @@
     <string name="app_name">Food Controller</string>
     <string name="greeting">Prepare to control your desires to eat!</string>
     <string name="example">Example</string>
+    <string name="product">Product</string>
     <string name="protein">Protein:</string>
     <string name="fat">Fat:</string>
     <string name="carbohydrates">Сarbohydrates:</string>
@@ -9,5 +10,6 @@
     <string name="fabText">Add</string>
     <string name="save_button">Save</string>
     <string name="empty_not_saved">No data , nothing save</string>
+    <string name="added_to_database_success">A new product was added to database successfully</string>
 
 </resources>

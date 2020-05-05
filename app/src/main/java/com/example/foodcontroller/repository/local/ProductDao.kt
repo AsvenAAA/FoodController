@@ -14,7 +14,7 @@ interface ProductDao {
     @Query("DELETE FROM product_table")
     fun deleteAllProducts()
 
-    @Update()
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun updateTarget(productEntity: ProductEntity)
 
     @Delete()

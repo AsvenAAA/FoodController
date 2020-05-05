@@ -7,16 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".NewProductActivity">
 
-
     <TextView
-        android:id="@+id/name_protein"
+        android:id="@+id/name_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:paddingStart="@dimen/standard_layout_padding_start"
         android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/protein">
+        android:text="@string/product">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_protein"
+        android:paddingEnd="@dimen/standard_layout_padding_end"
+        android:paddingStart="@dimen/standard_layout_padding_start">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/name_protein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:paddingTop="@dimen/standard_layout_padding_top"
+        android:text="@string/protein"
+        android:layout_below="@id/name_product">
 
     </TextView>
 
@@ -27,7 +47,8 @@
         android:layout_toEndOf="@id/name_protein"
         android:inputType="numberDecimal"
         android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start">
+        android:paddingStart="@dimen/standard_layout_padding_start"
+        android:layout_below="@id/edit_product_name">
 
     </EditText>
 
