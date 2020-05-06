@@ -35,11 +35,15 @@ class MainActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         adapter = FoodAdapter(this)
 
-        recyclerView = findViewById<RecyclerView>(R.id.food_recycler).apply {
+/*        recyclerView = findViewById<RecyclerView>(R.id.food_recycler).apply {
             setHasFixedSize(true)
             adapter = this.adapter
             layoutManager = this.layoutManager
-        }
+        }*/
+        recyclerView = findViewById(R.id.food_recycler)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
 
         productViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
         productViewModel.allProducts.observe(this, Observer { products ->
@@ -65,7 +69,9 @@ class MainActivity : AppCompatActivity() {
                                             protein = it[1].toFloat(),
                                             fat = it[2].toFloat(),
                                             carbohydrates = it[3].toFloat(),
-                                            calories = it[4].toFloat()) }
+                                            calories = it[4].toFloat())
+                productViewModel.insert(product)
+            }
             Toast.makeText(
                 applicationContext,
                 R.string.added_to_database_success,

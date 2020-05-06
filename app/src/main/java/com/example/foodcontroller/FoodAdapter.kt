@@ -15,7 +15,7 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     class FoodHolder(val linearLayout: LinearLayout) : RecyclerView.ViewHolder(linearLayout) {
-        val productTextView: TextView = linearLayout.findViewById(R.id.name_product)
+        val productTextView: TextView = linearLayout.findViewById(R.id.food_name)
         val proteinTextView: TextView = linearLayout.findViewById(R.id.protein)
         val fatTextView: TextView = linearLayout.findViewById(R.id.fat)
         val carbohydratesTextView: TextView = linearLayout.findViewById(R.id.carbohydrates)
