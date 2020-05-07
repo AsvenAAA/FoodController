@@ -11,5 +11,6 @@
     <string name="save_button">Save</string>
     <string name="empty_not_saved">No data , nothing save</string>
     <string name="added_to_database_success">A new product was added to database successfully</string>
+    <string name="food_rate">г /100 г</string>
 
 </resources>

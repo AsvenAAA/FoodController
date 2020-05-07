@@ -7,132 +7,155 @@
     android:layout_height="match_parent"
     tools:context=".NewProductActivity">
 
-    <TextView
-        android:id="@+id/name_product"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/product">
+        android:orientation="horizontal"
+        android:id="@+id/product_linear_layout"
+        android:padding="@dimen/standard_layout_padding">
 
-    </TextView>
+        <TextView
+            android:id="@+id/name_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:text="@string/product">
 
-    <EditText
-        android:id="@+id/edit_product_name"
-        android:layout_width="wrap_content"
+        </TextView>
+
+        <EditText
+            android:id="@+id/edit_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:inputType="numberDecimal">
+
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/name_protein"
-        android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start">
+        android:orientation="horizontal"
+        android:id="@+id/protein_linear_layout"
+        android:layout_below="@id/product_linear_layout"
+        android:padding="@dimen/standard_layout_padding">
 
-    </EditText>
+        <TextView
+            android:id="@+id/name_protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:text="@string/protein">
 
-    <TextView
-        android:id="@+id/name_protein"
-        android:layout_width="wrap_content"
+        </TextView>
+
+        <EditText
+            android:id="@+id/edit_protein_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/standard_layout_padding">
+
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/protein"
-        android:layout_below="@id/name_product">
+        android:orientation="horizontal"
+        android:id="@+id/fat_linear_layout"
+        android:layout_below="@id/protein_linear_layout"
+        android:padding="@dimen/standard_layout_padding">
 
-    </TextView>
+        <TextView
+            android:id="@+id/name_fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:text="@string/fat">
 
-    <EditText
-        android:id="@+id/edit_protein_number"
-        android:layout_width="wrap_content"
+        </TextView>
+
+        <EditText
+            android:id="@+id/edit_fat_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/standard_layout_padding">
+
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/name_protein"
-        android:inputType="numberDecimal"
-        android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:layout_below="@id/edit_product_name">
+        android:orientation="horizontal"
+        android:id="@+id/carbohydrates_linear_layout"
+        android:layout_below="@id/fat_linear_layout"
+        android:padding="@dimen/standard_layout_padding">
 
-    </EditText>
+        <TextView
+            android:id="@+id/name_carbohydrates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:text="@string/carbohydrates">
 
-    <TextView
-        android:id="@+id/name_fat"
-        android:layout_width="wrap_content"
+        </TextView>
+
+        <EditText
+            android:id="@+id/edit_carbohydrates_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/standard_layout_padding">
+
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_protein"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/fat">
+        android:orientation="horizontal"
+        android:id="@+id/calorie_linear_layout"
+        android:layout_below="@id/carbohydrates_linear_layout"
+        android:padding="@dimen/standard_layout_padding">
 
-    </TextView>
+        <TextView
+            android:id="@+id/name_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard_layout_padding"
+            android:text="@string/calorie">
 
-    <EditText
-        android:id="@+id/edit_fat_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/name_fat"
-        android:layout_below="@id/edit_protein_number"
-        android:inputType="numberDecimal"
-        android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start">
+        </TextView>
 
-    </EditText>
+        <EditText
+            android:id="@+id/edit_calorie_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/standard_layout_padding">
 
-    <TextView
-        android:id="@+id/name_carbohydrates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/name_fat"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/carbohydrates">
+        </EditText>
 
-    </TextView>
-
-    <EditText
-        android:id="@+id/edit_carbohydrates_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/name_carbohydrates"
-        android:layout_below="@id/edit_fat_number"
-        android:inputType="numberDecimal"
-        android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start">
-
-    </EditText>
-
-    <TextView
-        android:id="@+id/name_calorie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/name_carbohydrates"
-        android:paddingStart="@dimen/standard_layout_padding_start"
-        android:paddingTop="@dimen/standard_layout_padding_top"
-        android:text="@string/calorie">
-
-    </TextView>
-
-    <EditText
-        android:id="@+id/edit_calorie_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/name_calorie"
-        android:inputType="numberDecimal"
-        android:layout_below="@id/edit_carbohydrates_number"
-        android:paddingEnd="@dimen/standard_layout_padding_end"
-        android:paddingStart="@dimen/standard_layout_padding_start">
-
-    </EditText>
+    </LinearLayout>
 
     <Button
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/standard_layout_padding"
-        android:layout_toEndOf="@id/edit_carbohydrates_number"
-        android:layout_below="@id/edit_fat_number"
+        android:layout_margin="@dimen/standard_layout_padding"
         android:text="@string/save_button"
-        >
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true">
 
     </Button>
-
-
 
 </RelativeLayout>
