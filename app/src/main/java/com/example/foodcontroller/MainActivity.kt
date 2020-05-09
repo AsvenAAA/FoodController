@@ -1,9 +1,11 @@
 package com.example.foodcontroller
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -50,11 +52,33 @@ class MainActivity : AppCompatActivity() {
             products?.let { adapter.setProduct(it) }
         })
 
-
+        //Вызов активити для добавления нового продукта в общую базу хранения
         val buttonAddProduct = findViewById<FloatingActionButton>(R.id.fabAddNewProduct)
         buttonAddProduct.setOnClickListener {
             val intentToNewProduct = Intent(this@MainActivity, NewProductActivity::class.java)
             startActivityForResult(intentToNewProduct, newProductActivityRequestCode)
+        }
+
+        //Вызов активити для обновления существующего продукта в общей базе хранения
+        //Надо подумать над повторным использованием существующего активити
+        val buttonEditProduct = findViewById<FloatingActionButton>(R.id.fabUpdateProduct)
+        buttonEditProduct.setOnClickListener {
+            TODO()
+        }
+
+        //Удаление опрделенного продукта из общей базы хранения
+        val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
+        buttonDeleteTargetProduct.setOnClickListener {
+            //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+            //val popupDeleteTargetView = inflater(R.layout.)
+
+            TODO()
+        }
+
+        //Удаление все продуктов из общей базы хранения
+        val buttonDeleteAllProducts = findViewById<FloatingActionButton>(R.id.fabDeleteAllProduct)
+        buttonDeleteAllProducts.setOnClickListener {
+            productViewModel.deleteAll()
         }
 
     }
@@ -64,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         if(requestCode == newProductActivityRequestCode &&
                 resultCode == Activity.RESULT_OK) {
-            data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEWPRODUCTACTIVITY)?.let {
+            data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY)?.let {
                 val product = ProductEntity(product = it[0],
                                             protein = it[1].toFloat(),
                                             fat = it[2].toFloat(),
@@ -72,6 +96,7 @@ class MainActivity : AppCompatActivity() {
                                             calories = it[4].toFloat())
                 productViewModel.insert(product)
             }
+            // Унифицировать сообщение, либо добавить еще несколько, чтобы зависили от нажатой кнопки
             Toast.makeText(
                 applicationContext,
                 R.string.added_to_database_success,

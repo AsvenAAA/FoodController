@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/standard_layout_padding"
-            android:inputType="numberDecimal">
+            android:inputType="text">
 
         </EditText>
 

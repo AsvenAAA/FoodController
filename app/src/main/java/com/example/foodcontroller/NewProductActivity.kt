@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import com.example.foodcontroller.MainActivity.Companion.EXTRA_VARIABLE
-import kotlinx.android.synthetic.main.activity_new_product.*
 
 class NewProductActivity : AppCompatActivity() {
 
@@ -42,7 +39,7 @@ class NewProductActivity : AppCompatActivity() {
 
                 val dataList = arrayOf<String>(product, protein, fat, carbohydrates, calorie)
 
-                replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEWPRODUCTACTIVITY, dataList)
+                replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY, dataList)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             //Эта команда завершает работу текущего активити
@@ -52,6 +49,6 @@ class NewProductActivity : AppCompatActivity() {
 
 
     companion object {
-        const val EXTRA_RESPONSE_FROM_NEWPRODUCTACTIVITY = "com.example.foodcontroller"
+        const val EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY = "com.example.foodcontroller"
     }
 }

@@ -35,7 +35,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteTarget(productEntity)
     }
     //Почему для удаления всего использую корутины?
-    fun deleteAll(productEntity: ProductEntity) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteAll(productEntity)
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteAll()
     }
 }

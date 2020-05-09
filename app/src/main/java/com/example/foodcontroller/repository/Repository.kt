@@ -20,7 +20,7 @@ class Repository(private val productDao: ProductDao) {
         productDao.deleteTarget(productEntity)
     }
 
-    suspend fun deleteAll(productEntity: ProductEntity) {
+    suspend fun deleteAll() {
         productDao.deleteAllProducts()
     }
 
