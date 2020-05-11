@@ -6,7 +6,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -63,16 +65,20 @@ class MainActivity : AppCompatActivity() {
         //Надо подумать над повторным использованием существующего активити
         val buttonEditProduct = findViewById<FloatingActionButton>(R.id.fabUpdateProduct)
         buttonEditProduct.setOnClickListener {
-            TODO()
+
         }
 
         //Удаление опрделенного продукта из общей базы хранения
         val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
         buttonDeleteTargetProduct.setOnClickListener {
             //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE)
-            //val popupDeleteTargetView = inflater(R.layout.)
+            //Вызов текущего корневого viewgroup
+            val currentMainView = window.decorView.rootView as ViewGroup
+            val inflater : LayoutInflater = layoutInflater
+            val popupDeleteTargetView = inflater.inflate(R.layout.popup_delete_target_small_window, currentMainView, false)
+            val popUpWindow: PopupWindow = PopupWindow(this)
 
-            TODO()
+
         }
 
         //Удаление все продуктов из общей базы хранения
@@ -109,10 +115,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
-
-    fun addNewProduct(){
-        TODO()
     }
 
     companion object {

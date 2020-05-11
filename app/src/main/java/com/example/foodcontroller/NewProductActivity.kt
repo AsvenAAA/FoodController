@@ -19,7 +19,6 @@ class NewProductActivity : AppCompatActivity() {
         val fatView = findViewById<TextView>(R.id.edit_fat_number)
         val carbohydratesView = findViewById<TextView>(R.id.edit_carbohydrates_number)
         val calorieView = findViewById<TextView>(R.id.edit_calorie_number)
-
         val button = findViewById<Button>(R.id.save_button)
         button.setOnClickListener{
             val replyIntent = Intent()
