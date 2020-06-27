@@ -5,18 +5,21 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_margin="@dimen/standard_layout_margin"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:paddingTop="@dimen/standard_layout_padding">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/target_to_delete"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/popup_delete_target_edit_text_message"
+        android:layout_weight="1"
         android:inputType="text"
-        android:layout_weight="1">
+        android:text="@string/popup_delete_target_edit_text_message">
 
     </EditText>
 
     <Button
+        android:id="@+id/popupDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_button_text">

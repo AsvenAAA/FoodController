@@ -1,15 +1,16 @@
 package com.example.foodcontroller
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.PopupWindow
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     //Коды ответов.
     //С помощью них можно точно определить от каких активити пришли ответы.
     private val newProductActivityRequestCode = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,12 +73,25 @@ class MainActivity : AppCompatActivity() {
         //Удаление опрделенного продукта из общей базы хранения
         val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
         buttonDeleteTargetProduct.setOnClickListener {
-            //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE)
+            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val popupView : View = inflater.inflate(R.layout.popup_delete_target_small_window, null)
+            val width : Int = LinearLayout.LayoutParams.WRAP_CONTENT
+            val height : Int = LinearLayout.LayoutParams.WRAP_CONTENT
+            val focusable : Boolean = true
+            val popupWindow = PopupWindow(popupView, width, height, focusable)
+            popupWindow.showAtLocation(it, Gravity.CENTER, 0, 0)
+
+            val buttonDeleteInPopupWindow = findViewById<Button>(R.id.popupDeleteButton)
+            buttonDeleteInPopupWindow.setOnClickListener {
+                val target = findViewById<EditText>(R.id.target_to_delete).text.toString()
+               // productViewModel.deleteTarget(productEntity = ProductEntity(target))
+            }
             //Вызов текущего корневого viewgroup
-            val currentMainView = window.decorView.rootView as ViewGroup
-            val inflater : LayoutInflater = layoutInflater
-            val popupDeleteTargetView = inflater.inflate(R.layout.popup_delete_target_small_window, currentMainView, false)
-            val popUpWindow: PopupWindow = PopupWindow(this)
+            //val currentMainView = window.decorView.rootView as ViewGroup
+            //val inflater : LayoutInflater = layoutInflater
+            //val popupDeleteTargetView = inflater.inflate(R.layout.popup_delete_target_small_window, currentMainView, false)
+            //val popUpWindow: PopupWindow = PopupWindow(this)
+
 
 
         }
