@@ -30,7 +30,7 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
     //Непонятно как лучше сделать, определить переменные указивающие на TextView в холдере или же просто
     //импортировать вью из активити и забиндить в них значение в onBindViewHolder
     override fun onBindViewHolder(holder: FoodHolder, position: Int) {
-        holder.productTextView.text = productEntity[position].product.toString()
+        holder.productTextView.text = productEntity[position].product
         holder.proteinTextView.text = productEntity[position].protein.toString()
         holder.fatTextView.text = productEntity[position].fat.toString()
         holder.carbohydratesTextView.text = productEntity[position].carbohydrates.toString()
@@ -42,6 +42,10 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
     internal fun setProduct(product: List<ProductEntity>) {
         this.productEntity = product
         notifyDataSetChanged()
+    }
+
+    fun getProductAtPosition(position: Int) : ProductEntity {
+        return productEntity[position]
     }
 
 }

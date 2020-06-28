@@ -6,10 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "product_table")
 class ProductEntity(
-    @PrimaryKey @ColumnInfo(name = "product_name") val product : String,
-                @ColumnInfo(name = "protein") val protein : Float,
-                @ColumnInfo(name = "fat") val fat : Float,
-                @ColumnInfo(name = "carbohydrates") val carbohydrates : Float,
-                @ColumnInfo(name = "calories") val calories : Float
+    @PrimaryKey(autoGenerate = true) val id : Int = 0,
+                @ColumnInfo(name = "product_name") var product : String,
+                @ColumnInfo(name = "protein") var protein : Float,
+                @ColumnInfo(name = "fat") var fat : Float,
+                @ColumnInfo(name = "carbohydrates") var carbohydrates : Float,
+                @ColumnInfo(name = "calories") var calories : Float
 
 )

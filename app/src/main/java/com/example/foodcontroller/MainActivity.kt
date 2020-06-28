@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodcontroller.repository.local.ProductEntity
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    //private lateinit var adapter: RecyclerView.Adapter<FoodAdapter.FoodHolder>
     private lateinit var adapter: FoodAdapter
     private lateinit var productViewModel: FoodViewModel
 
@@ -41,11 +41,14 @@ class MainActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         adapter = FoodAdapter(this)
 
+        //Тут не создавался recyclerview почему - не понятно, по идее apply должен делать тоже самое, что и
+        //приравнивание параметров ниже
 /*        recyclerView = findViewById<RecyclerView>(R.id.food_recycler).apply {
             setHasFixedSize(true)
             adapter = this.adapter
             layoutManager = this.layoutManager
         }*/
+
         recyclerView = findViewById(R.id.food_recycler)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
@@ -55,6 +58,29 @@ class MainActivity : AppCompatActivity() {
         productViewModel.allProducts.observe(this, Observer { products ->
             products?.let { adapter.setProduct(it) }
         })
+
+        // Удаление определенного продукта через swipe
+        val touchHelperCallback =
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val productPosition = viewHolder.adapterPosition
+                    val productEntity : ProductEntity = adapter.getProductAtPosition(productPosition)
+                    productViewModel.deleteTarget(productEntity)
+                }
+
+
+            }
+        val touchHelper : ItemTouchHelper = ItemTouchHelper(touchHelperCallback)
+        touchHelper.attachToRecyclerView(recyclerView)
 
         //Вызов активити для добавления нового продукта в общую базу хранения
         val buttonAddProduct = findViewById<FloatingActionButton>(R.id.fabAddNewProduct)
@@ -67,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         //Надо подумать над повторным использованием существующего активити
         val buttonEditProduct = findViewById<FloatingActionButton>(R.id.fabUpdateProduct)
         buttonEditProduct.setOnClickListener {
-
+            
         }
 
         //Удаление опрделенного продукта из общей базы хранения
@@ -86,14 +112,6 @@ class MainActivity : AppCompatActivity() {
                 val target = findViewById<EditText>(R.id.target_to_delete).text.toString()
                // productViewModel.deleteTarget(productEntity = ProductEntity(target))
             }
-            //Вызов текущего корневого viewgroup
-            //val currentMainView = window.decorView.rootView as ViewGroup
-            //val inflater : LayoutInflater = layoutInflater
-            //val popupDeleteTargetView = inflater.inflate(R.layout.popup_delete_target_small_window, currentMainView, false)
-            //val popUpWindow: PopupWindow = PopupWindow(this)
-
-
-
         }
 
         //Удаление все продуктов из общей базы хранения

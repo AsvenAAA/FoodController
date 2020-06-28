@@ -5,10 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.foodcontroller.migration.RoomMigration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(ProductEntity::class), version = 1)
+@Database(entities = arrayOf(ProductEntity::class), version = 2)
 abstract class ProductDatabase : RoomDatabase() {
 
     private class ProducatDatabseCallBack(
@@ -20,9 +21,6 @@ abstract class ProductDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     var productDao = database.getProductDao()
-
-                    var testProductEntity = ProductEntity("TestFood", 10f, 9f, 8f, 7f)
-                    productDao.insert(testProductEntity)
                 }
             }
         }
@@ -39,6 +37,7 @@ abstract class ProductDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context, scope: CoroutineScope): ProductDatabase {
             val pathToDatabase = context.getDatabasePath("product_table").absolutePath
+            //val roomMigration : RoomMigration = RoomMigration()
             val savedDatabaseInstance = INSTANCE
             if(savedDatabaseInstance != null) {
                 return savedDatabaseInstance
@@ -49,6 +48,8 @@ abstract class ProductDatabase : RoomDatabase() {
                     context,
                     ProductDatabase::class.java,
                     "product_table")
+                    //.addMigrations(roomMigration.MIGRATION_1_2)
+                    .fallbackToDestructiveMigration()
                     .addCallback(ProducatDatabseCallBack(scope))
                     .build()
                 INSTANCE = instanceOfDatabase
