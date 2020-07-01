@@ -26,7 +26,6 @@ class NewProductActivity : AppCompatActivity() {
                TextUtils.isEmpty(fatView.text) and
                TextUtils.isEmpty(carbohydratesView.text) and
                TextUtils.isEmpty(calorieView.text)) {
-
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
 

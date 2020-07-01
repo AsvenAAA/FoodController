@@ -49,7 +49,7 @@ abstract class ProductDatabase : RoomDatabase() {
                     ProductDatabase::class.java,
                     "product_table")
                     //.addMigrations(roomMigration.MIGRATION_1_2)
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .addCallback(ProducatDatabseCallBack(scope))
                     .build()
                 INSTANCE = instanceOfDatabase

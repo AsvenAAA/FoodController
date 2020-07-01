@@ -6,10 +6,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -76,11 +73,28 @@ class MainActivity : AppCompatActivity() {
                     val productEntity : ProductEntity = adapter.getProductAtPosition(productPosition)
                     productViewModel.deleteTarget(productEntity)
                 }
-
-
             }
-        val touchHelper : ItemTouchHelper = ItemTouchHelper(touchHelperCallback)
+        val touchHelper = ItemTouchHelper(touchHelperCallback)
         touchHelper.attachToRecyclerView(recyclerView)
+
+        //Попытался сделать реакцию на нажатие пункта в recycler, не работает, думаю в корне не верно
+        /*val test =
+            object:
+                RecyclerView.SimpleOnItemTouchListener() {
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    if(e.action == MotionEvent.ACTION_BUTTON_PRESS)
+                    {
+                        Toast.makeText(
+                            applicationContext,
+                            "You touch me tum tum tum!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        return true
+                    }
+                    return false
+                }
+            }
+        test.onTouchEvent(recyclerView, MotionEvent.obtain(10L))*/
 
         //Вызов активити для добавления нового продукта в общую базу хранения
         val buttonAddProduct = findViewById<FloatingActionButton>(R.id.fabAddNewProduct)
@@ -93,8 +107,17 @@ class MainActivity : AppCompatActivity() {
         //Надо подумать над повторным использованием существующего активити
         val buttonEditProduct = findViewById<FloatingActionButton>(R.id.fabUpdateProduct)
         buttonEditProduct.setOnClickListener {
-            
+
         }
+
+/*        val test = findViewById<Button>(R.id.button_in_eaten_food)
+        test.setOnClickListener{
+            Toast.makeText(
+                this,
+                "Oy you did it!",
+                Toast.LENGTH_LONG
+            )
+        }*/
 
         //Удаление опрделенного продукта из общей базы хранения
         val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
