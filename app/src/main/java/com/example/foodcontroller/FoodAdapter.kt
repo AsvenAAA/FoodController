@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodcontroller.repository.local.ProductEntity
 
-
-class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder>(), View.OnClickListener{
+//, View.OnClickListener
+class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder>(){
 
     private var productEntity: List<ProductEntity> = emptyList()
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -72,11 +72,6 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
     fun getProductAtPosition(position: Int) : ProductEntity {
         return productEntity[position]
     }
-
-    override fun onClick(v: View?) {
-
-    }
-
 
     //Попытки добавить редактирование слова
     fun setOnProductClickListener(clickListener: UpdateProductClickListener) {

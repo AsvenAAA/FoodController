@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     //Коды ответов.
     //С помощью них можно точно определить от каких активити пришли ответы.
     private val newProductActivityRequestCode = 1
+    private val updateProductInNewProductActivity = 2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +111,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        adapter.setOnProductClickListener(object : FoodAdapter.UpdateProductClickListener{
+            override fun onProductClick(view: View, position: Int) {
+                val product = adapter.getProductAtPosition(position)
+                launchUpdateNewProductActivity(product)
+            }
+        })
+
 /*        val test = findViewById<Button>(R.id.button_in_eaten_food)
         test.setOnClickListener{
             Toast.makeText(
@@ -173,8 +181,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun launchUpdateNewProductActivity(product: ProductEntity) {
+        val intent = Intent(this, NewProductActivity::class.java)
+        val dataList = arrayOf(product.protein, product.fat, product.carbohydrates, product.calories)
+        intent.putExtra(EXTRA_VARIABLE_UPDATE_PRODUCT, dataList)
+        startActivityForResult(intent, updateProductInNewProductActivity)
+    }
+
     companion object {
         const val EXTRA_VARIABLE = "com.example.foodcontroller"
+        const val EXTRA_VARIABLE_UPDATE_PRODUCT = "product_updated"
     }
 
 }
