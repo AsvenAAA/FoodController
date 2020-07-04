@@ -10,7 +10,9 @@
     <string name="fabText">Add</string>
     <string name="save_button">Save</string>
     <string name="empty_not_saved">No data , nothing save</string>
-    <string name="added_to_database_success">A new product was added to database successfully</string>
+    <string name="added_to_database_success">A new product was added successfully to database </string>
+    <string name="update_product_in_database_success">Product updated successfully in database</string>
+    <string name="update_product_in_database_declined">Product could not update in database</string>
     <string name="food_rate">г /100 г</string>
     <string name="popup_delete_target_edit_text_message">Target product</string>
     <string name="delete_button_text">Delete</string>

@@ -78,25 +78,6 @@ class MainActivity : AppCompatActivity() {
         val touchHelper = ItemTouchHelper(touchHelperCallback)
         touchHelper.attachToRecyclerView(recyclerView)
 
-        //Попытался сделать реакцию на нажатие пункта в recycler, не работает, думаю в корне не верно
-        /*val test =
-            object:
-                RecyclerView.SimpleOnItemTouchListener() {
-                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                    if(e.action == MotionEvent.ACTION_BUTTON_PRESS)
-                    {
-                        Toast.makeText(
-                            applicationContext,
-                            "You touch me tum tum tum!",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        return true
-                    }
-                    return false
-                }
-            }
-        test.onTouchEvent(recyclerView, MotionEvent.obtain(10L))*/
-
         //Вызов активити для добавления нового продукта в общую базу хранения
         val buttonAddProduct = findViewById<FloatingActionButton>(R.id.fabAddNewProduct)
         buttonAddProduct.setOnClickListener {
@@ -117,15 +98,6 @@ class MainActivity : AppCompatActivity() {
                 launchUpdateNewProductActivity(product)
             }
         })
-
-/*        val test = findViewById<Button>(R.id.button_in_eaten_food)
-        test.setOnClickListener{
-            Toast.makeText(
-                this,
-                "Oy you did it!",
-                Toast.LENGTH_LONG
-            )
-        }*/
 
         //Удаление опрделенного продукта из общей базы хранения
         val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
@@ -172,6 +144,34 @@ class MainActivity : AppCompatActivity() {
                 R.string.added_to_database_success,
                 Toast.LENGTH_LONG
             ).show()
+            // Не работает, тут попытка добавить обновленные данные
+        } else if (requestCode == updateProductInNewProductActivity && resultCode == Activity.RESULT_OK) {
+            data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)?.let {
+                val id = data.getIntExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
+                if (id != -1) {
+                    val product = ProductEntity(id = id,
+                        product = it[0],
+                        protein = it[1].toFloat(),
+                        fat = it[2].toFloat(),
+                        carbohydrates = it[3].toFloat(),
+                        calories = it[4].toFloat())
+                    productViewModel.update(product)
+
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.update_product_in_database_success,
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.update_product_in_database_declined,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
         } else {
             Toast.makeText(
                 applicationContext,
@@ -185,12 +185,13 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, NewProductActivity::class.java)
         val dataList = arrayOf(product.protein, product.fat, product.carbohydrates, product.calories)
         intent.putExtra(EXTRA_VARIABLE_UPDATE_PRODUCT, dataList)
+        intent.putExtra(EXTRA_VARIABLE, product.id)
         startActivityForResult(intent, updateProductInNewProductActivity)
     }
 
     companion object {
         const val EXTRA_VARIABLE = "com.example.foodcontroller"
-        const val EXTRA_VARIABLE_UPDATE_PRODUCT = "product_updated"
+        const val EXTRA_VARIABLE_UPDATE_PRODUCT = "com.example.foodcontroller.product_updated"
     }
 
 }

@@ -19,10 +19,11 @@ class NewProductActivity : AppCompatActivity() {
         val fatView = findViewById<TextView>(R.id.edit_fat_number)
         val carbohydratesView = findViewById<TextView>(R.id.edit_carbohydrates_number)
         val calorieView = findViewById<TextView>(R.id.edit_calorie_number)
-        val button = findViewById<Button>(R.id.save_button)
-
-        intent.extras?.let {
-            val product = it.getStringArray(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)
+        val saveButton = findViewById<Button>(R.id.save_button)
+        //Не работает, тут попытка принять и отобразить уже существующие данные
+        val intentExtra = intent.extras
+        if(intentExtra != null) {
+            val product = intentExtra.getStringArray(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)
             product?.let {
                 productView.text = product[0]
                 proteinView.text = product[1]
@@ -32,7 +33,18 @@ class NewProductActivity : AppCompatActivity() {
             }
         }
 
-        button.setOnClickListener{
+/*        intent.extras?.let {
+            val product = it.getStringArray(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)
+            product?.let {
+                productView.text = product[0]
+                proteinView.text = product[1]
+                fatView.text = product[2]
+                carbohydratesView.text = product[3]
+                calorieView.text = product[4]
+            }
+        }*/
+
+        saveButton.setOnClickListener{
             val replyIntent = Intent()
             if(TextUtils.isEmpty(proteinView.text) and
                TextUtils.isEmpty(fatView.text) and
@@ -48,11 +60,14 @@ class NewProductActivity : AppCompatActivity() {
                 val carbohydrates = carbohydratesView.text.toString()
                 val calorie = calorieView.text.toString()
                 val dataList = arrayOf(product, protein, fat, carbohydrates, calorie)
-
+                //Не работает, тут попытка отослать в main обновленные данные
                 replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY, dataList)
-                if(intent.extras != null && intent.extras!!.containsKey(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)){
-                    //val id = intent.extras.getInt(
-                    //    EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
+                if(intentExtra != null && intentExtra.containsKey(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)){
+                    val id = intentExtra.getInt(
+                        EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
+                    if (id != -1) {
+                        replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, id)
+                    }
                 }
                 setResult(Activity.RESULT_OK, replyIntent)
             }
