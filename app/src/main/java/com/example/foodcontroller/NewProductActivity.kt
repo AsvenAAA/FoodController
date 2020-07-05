@@ -62,10 +62,10 @@ class NewProductActivity : AppCompatActivity() {
                 val dataList = arrayOf(product, protein, fat, carbohydrates, calorie)
                 //Не работает, тут попытка отослать в main обновленные данные
                 replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY, dataList)
-                if(intentExtra != null && intentExtra.containsKey(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)){
+                if(intentExtra != null && intentExtra.containsKey(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)) {
                     val id = intentExtra.getInt(
-                        EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
-                    if (id != -1) {
+                        MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT, 2)
+                    if (id == 2) {
                         replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, id)
                     }
                 }

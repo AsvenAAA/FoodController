@@ -125,6 +125,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun launchUpdateNewProductActivity(product: ProductEntity) {
+        val intent = Intent(this, NewProductActivity::class.java)
+        val dataList = arrayOf<String>(product.product, product.protein.toString(),
+                                        product.fat.toString(), product.carbohydrates.toString(), product.calories.toString())
+        intent.putExtra(EXTRA_VARIABLE_UPDATE_PRODUCT, dataList)
+        intent.putExtra(EXTRA_VARIABLE, product.id)
+        startActivityForResult(intent, updateProductInNewProductActivity)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -146,6 +155,8 @@ class MainActivity : AppCompatActivity() {
             ).show()
             // Не работает, тут попытка добавить обновленные данные
         } else if (requestCode == updateProductInNewProductActivity && resultCode == Activity.RESULT_OK) {
+            //Тут он не получает данные от NewProductActivity, из=за этого пропускается весь этот блок кода и ничего не выводится
+            val testData = data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)
             data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)?.let {
                 val id = data.getIntExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
                 if (id != -1) {
@@ -179,14 +190,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
-
-    fun launchUpdateNewProductActivity(product: ProductEntity) {
-        val intent = Intent(this, NewProductActivity::class.java)
-        val dataList = arrayOf(product.protein, product.fat, product.carbohydrates, product.calories)
-        intent.putExtra(EXTRA_VARIABLE_UPDATE_PRODUCT, dataList)
-        intent.putExtra(EXTRA_VARIABLE, product.id)
-        startActivityForResult(intent, updateProductInNewProductActivity)
     }
 
     companion object {
