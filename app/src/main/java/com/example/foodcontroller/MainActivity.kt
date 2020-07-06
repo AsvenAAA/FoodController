@@ -156,8 +156,7 @@ class MainActivity : AppCompatActivity() {
             // Не работает, тут попытка добавить обновленные данные
         } else if (requestCode == updateProductInNewProductActivity && resultCode == Activity.RESULT_OK) {
             //Тут он не получает данные от NewProductActivity, из=за этого пропускается весь этот блок кода и ничего не выводится
-            val testData = data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)
-            data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE)?.let {
+            data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY)?.let {
                 val id = data.getIntExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
                 if (id != -1) {
                     val product = ProductEntity(id = id,
