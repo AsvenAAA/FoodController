@@ -1,6 +1,6 @@
 package com.example.foodcontroller
 
-import android.annotation.SuppressLint
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foodcontroller.repository.local.ProductEntity
 import com.example.foodcontroller.viewmodel.FoodViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.math.BigDecimal
-import java.math.BigInteger
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,21 +83,15 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intentToNewProduct, newProductActivityRequestCode)
         }
 
-        //Вызов активити для обновления существующего продукта в общей базе хранения
-        //Надо подумать над повторным использованием существующего активити
-        val buttonEditProduct = findViewById<FloatingActionButton>(R.id.fabUpdateProduct)
-        buttonEditProduct.setOnClickListener {
-
-        }
-
-        adapter.setOnProductClickListener(object : FoodAdapter.UpdateProductClickListener{
+        // Реакция на нажатие на область с описанием продукта
+        adapter.setOnProductClickListener(object : FoodAdapter.UpdateProductClickListener {
             override fun onProductClick(view: View, position: Int) {
                 val product = adapter.getProductAtPosition(position)
                 launchUpdateNewProductActivity(product)
             }
         })
 
-        //Удаление опрделенного продукта из общей базы хранения
+        //Вызывает небольшое окно, можно придумать в нем какое-либо действие
         val buttonDeleteTargetProduct = findViewById<FloatingActionButton>(R.id.fabDeleteTargetProduct)
         buttonDeleteTargetProduct.setOnClickListener {
             val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -109,15 +101,9 @@ class MainActivity : AppCompatActivity() {
             val focusable : Boolean = true
             val popupWindow = PopupWindow(popupView, width, height, focusable)
             popupWindow.showAtLocation(it, Gravity.CENTER, 0, 0)
-
-            val buttonDeleteInPopupWindow = findViewById<Button>(R.id.popupDeleteButton)
-            buttonDeleteInPopupWindow.setOnClickListener {
-                val target = findViewById<EditText>(R.id.target_to_delete).text.toString()
-               // productViewModel.deleteTarget(productEntity = ProductEntity(target))
-            }
         }
 
-        //Удаление все продуктов из общей базы хранения
+        //Удаление всех продуктов из общей базы хранения
         val buttonDeleteAllProducts = findViewById<FloatingActionButton>(R.id.fabDeleteAllProduct)
         buttonDeleteAllProducts.setOnClickListener {
             productViewModel.deleteAll()
@@ -125,10 +111,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Передает id нужного объекта в базе в активити с редактированием данных
     fun launchUpdateNewProductActivity(product: ProductEntity) {
         val intent = Intent(this, NewProductActivity::class.java)
         val dataList = arrayOf<String>(product.product, product.protein.toString(),
-                                        product.fat.toString(), product.carbohydrates.toString(), product.calories.toString())
+                                        product.fat.toString(), product.carbohydrates.toString(),
+                                        product.calories.toString())
         intent.putExtra(EXTRA_VARIABLE_UPDATE_PRODUCT, dataList)
         intent.putExtra(EXTRA_VARIABLE, product.id)
         startActivityForResult(intent, updateProductInNewProductActivity)
@@ -153,11 +141,12 @@ class MainActivity : AppCompatActivity() {
                 R.string.added_to_database_success,
                 Toast.LENGTH_LONG
             ).show()
-            // Не работает, тут попытка добавить обновленные данные
         } else if (requestCode == updateProductInNewProductActivity && resultCode == Activity.RESULT_OK) {
             //Тут он не получает данные от NewProductActivity, из=за этого пропускается весь этот блок кода и ничего не выводится
             data?.getStringArrayExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY)?.let {
                 val id = data.getIntExtra(NewProductActivity.EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE, -1)
+                // -1 это id по умолчанию, значит что ни какого id продукта передано не было, передается из NewProductActivity
+                // id важно, так как по нему выбирается какой имменно обьект меняется в базе
                 if (id != -1) {
                     val product = ProductEntity(id = id,
                         product = it[0],
@@ -192,7 +181,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_VARIABLE = "com.example.foodcontroller"
+        const val EXTRA_VARIABLE = "com.example.foodcontroller.add_new_product"
         const val EXTRA_VARIABLE_UPDATE_PRODUCT = "com.example.foodcontroller.product_updated"
     }
 

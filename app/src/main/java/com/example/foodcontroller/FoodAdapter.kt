@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodcontroller.repository.local.ProductEntity
 
@@ -29,15 +28,9 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
         var carbohydratesTextView: TextView = linearLayout.findViewById(R.id.carbohydrates)
         var calorieTextView: TextView = linearLayout.findViewById(R.id.calories)
 
-        //Попытки добавить редактирование слова
+        // Ждет нажатия на объект
         init {
             super.itemView
-            productTextView = itemView.findViewById(R.id.food_name)
-            proteinTextView = itemView.findViewById(R.id.protein)
-            fatTextView = itemView.findViewById(R.id.fat)
-            carbohydratesTextView = itemView.findViewById(R.id.carbohydrates)
-            calorieTextView = itemView.findViewById(R.id.calories)
-
             itemView.setOnClickListener(View.OnClickListener {
                 clickListener.onProductClick(it, adapterPosition)
             })
@@ -73,7 +66,7 @@ class FoodAdapter(context: Context): RecyclerView.Adapter<FoodAdapter.FoodHolder
         return productEntity[position]
     }
 
-    //Попытки добавить редактирование слова
+    // По факту работает к делегаты в c#, реакция на событие
     fun setOnProductClickListener(clickListener: UpdateProductClickListener) {
         FoodAdapter.clickListener = clickListener
     }

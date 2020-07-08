@@ -20,8 +20,9 @@ class NewProductActivity : AppCompatActivity() {
         val carbohydratesView = findViewById<TextView>(R.id.edit_carbohydrates_number)
         val calorieView = findViewById<TextView>(R.id.edit_calorie_number)
         val saveButton = findViewById<Button>(R.id.save_button)
-        //Не работает, тут попытка принять и отобразить уже существующие данные
         val intentExtra = intent.extras
+
+        // Если были переданы данные, то заполняет ими текущий layout
         if(intentExtra != null) {
             val product = intentExtra.getStringArray(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)
             product?.let {
@@ -33,34 +34,25 @@ class NewProductActivity : AppCompatActivity() {
             }
         }
 
-/*        intent.extras?.let {
-            val product = it.getStringArray(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)
-            product?.let {
-                productView.text = product[0]
-                proteinView.text = product[1]
-                fatView.text = product[2]
-                carbohydratesView.text = product[3]
-                calorieView.text = product[4]
-            }
-        }*/
-
+        //Если данные не заполнены, отсылает код отмены добавления
+        //Крашится
         saveButton.setOnClickListener{
             val replyIntent = Intent()
-            if(TextUtils.isEmpty(proteinView.text) and
-               TextUtils.isEmpty(fatView.text) and
-               TextUtils.isEmpty(carbohydratesView.text) and
+            if(TextUtils.isEmpty(proteinView.text) ||
+               TextUtils.isEmpty(fatView.text) ||
+               TextUtils.isEmpty(carbohydratesView.text) ||
                TextUtils.isEmpty(calorieView.text)) {
-
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-
+                setResult(Activity.RESULT_CANCELED)
             } else {
+                // Если данные есть, то берет их, запихивает в массив строк и передает.
+                // Передает два набора с данными, один содержит изменяемые в базе данные(характеристики продуктов), а другой id
                 val product = productView.text.toString()
                 val protein = proteinView.text.toString()
                 val fat = fatView.text.toString()
                 val carbohydrates = carbohydratesView.text.toString()
                 val calorie = calorieView.text.toString()
                 val dataList = arrayOf(product, protein, fat, carbohydrates, calorie)
-                //Не работает, тут попытка отослать в main обновленные данные
+
                 replyIntent.putExtra(EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY, dataList)
                 if (intentExtra != null && intentExtra.containsKey(MainActivity.EXTRA_VARIABLE_UPDATE_PRODUCT)) {
                     val id = intentExtra.getInt(
@@ -78,7 +70,7 @@ class NewProductActivity : AppCompatActivity() {
 
 
     companion object {
-        const val EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY = "com.example.foodcontroller"
+        const val EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY = "com.example.foodcontroller.REPLY"
         const val EXTRA_RESPONSE_FROM_NEW_PRODUCT_ACTIVITY_AFTER_UPDATE = "com.example.foodcontroller.REPLY_AFTER_UPDATE"
     }
 }
